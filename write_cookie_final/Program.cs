@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace write_cookie_final
             {
 
 
-                string path = @"C:\Users\ADMIN\Desktop\log 2400";
+                string path = @"C:\Users\PC\Desktop\log 2400";
                 string[] list_forlder = getAllFolder(path);
                 // lấy tất cả các file trong forlder
                 foreach (String name_forlder in list_forlder)
@@ -105,7 +107,9 @@ namespace write_cookie_final
                                 {
                                     string code = line.Substring(line.IndexOf(key) + key.Length);
                                     demo++;
-                                    string text = code.Replace(" ", string.Empty);
+                                    string test = code.ToString();
+                                    string text = test.Replace("\t", string.Empty);
+                                    Console.WriteLine(text);
                                     if (key_code.Keys.Contains(key))
                                     {
                                         if (!key_code[key].Contains(text))
@@ -172,7 +176,7 @@ namespace write_cookie_final
         }
         public static void writeToFile(Cookie_entity cookie_Entity)
         {
-            TextWriter tsw = new StreamWriter(@"C:\Users\ADMIN\Desktop\demo.txt", true);
+            TextWriter tsw = new StreamWriter(@"C:\Users\PC\Desktop\demo.txt", true);
             tsw.WriteLine(cookie_Entity.getPath());
             if (cookie_Entity.getListValue()?.Any() ?? false)
             {
@@ -211,9 +215,92 @@ namespace write_cookie_final
         }
     }
 
-    public void login()
+    public void write_to_excel()
     {
 
+        var Articles = new[]
+      {
+                new {
+                    Id = "101", Name = "C++"
+                },
+                new {
+                    Id = "102", Name = "Python"
+                },
+                new {
+                    Id = "103", Name = "Java Script"
+                },
+                new {
+                    Id = "104", Name = "GO"
+                },
+                new {
+                    Id = "105", Name = "Java"
+                },
+                new {
+                    Id = "106", Name = "C#"
+                }
+            };
+
+        // Creating an instance
+        // of ExcelPackage
+        ExcelPackage excel = new ExcelPackage();
+
+        // name of the sheet
+        var workSheet = excel.Workbook.Worksheets.Add("Sheet1");
+
+        // setting the properties
+        // of the work sheet 
+        workSheet.TabColor = System.Drawing.Color.Black;
+        workSheet.DefaultRowHeight = 12;
+
+        // Setting the properties
+        // of the first row
+        workSheet.Row(1).Height = 20;
+        workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        workSheet.Row(1).Style.Font.Bold = true;
+
+        // Header of the Excel sheet
+        workSheet.Cells[1, 1].Value = "S.No";
+        workSheet.Cells[1, 2].Value = "Id";
+        workSheet.Cells[1, 3].Value = "Name";
+
+        // Inserting the article data into excel
+        // sheet by using the for each loop
+        // As we have values to the first row 
+        // we will start with second row
+        int recordIndex = 2;
+
+        foreach (var article in Articles)
+        {
+            workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
+            workSheet.Cells[recordIndex, 2].Value = article.Id;
+            workSheet.Cells[recordIndex, 3].Value = article.Name;
+            recordIndex++;
+        }
+
+        // By default, the column width is not 
+        // set to auto fit for the content
+        // of the range, so we are using
+        // AutoFit() method here. 
+        workSheet.Column(1).AutoFit();
+        workSheet.Column(2).AutoFit();
+        workSheet.Column(3).AutoFit();
+
+        // file name with .xlsx extension 
+        string p_strPath = @"C:\Users\PC\Desktop\demo.xlsx";
+
+        if (File.Exists(p_strPath))
+            File.Delete(p_strPath);
+
+        // Create excel file on physical disk 
+        FileStream objFileStrm = File.Create(p_strPath);
+        objFileStrm.Close();
+
+        // Write content to excel file 
+        File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
+        //Close Excel package
+        excel.Dispose();
+
+
     }
-    
+
 }

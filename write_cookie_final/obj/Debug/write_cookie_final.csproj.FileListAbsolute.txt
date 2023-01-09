@@ -5,3 +5,10 @@ C:\Users\ADMIN\source\repos\write_cookie_final\write_cookie_final\obj\Debug\writ
 C:\Users\ADMIN\source\repos\write_cookie_final\write_cookie_final\obj\Debug\write_cookie_final.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\source\repos\write_cookie_final\write_cookie_final\obj\Debug\write_cookie_final.exe
 C:\Users\ADMIN\source\repos\write_cookie_final\write_cookie_final\obj\Debug\write_cookie_final.pdb
+D:\tool\tool_fb\write_cookie_final\obj\Debug\write_cookie_final.csprojAssemblyReference.cache
+D:\tool\tool_fb\write_cookie_final\obj\Debug\write_cookie_final.csproj.CoreCompileInputs.cache
+D:\tool\tool_fb\write_cookie_final\obj\Debug\write_cookie_final.exe
+D:\tool\tool_fb\write_cookie_final\obj\Debug\write_cookie_final.pdb
+D:\tool\tool_fb\write_cookie_final\bin\Debug\write_cookie_final.exe.config
+D:\tool\tool_fb\write_cookie_final\bin\Debug\write_cookie_final.exe
+D:\tool\tool_fb\write_cookie_final\bin\Debug\write_cookie_final.pdb
